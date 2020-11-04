@@ -1,39 +1,33 @@
 import * as React from 'react';
-import { useSelector, shallowEqual, useDispatch, Provider } from 'react-redux'
-import { IUser, IUserState } from './type.d'
+import { useSelector, Provider } from 'react-redux'
+import { IUser, IUserState } from './interfaces'
 import { store } from './Store';
-//import logo from './logo.svg';
-import './App.css';
-
+import './App.scss'
 import { AddUser } from './components/AddUser'
-import { addUser, removeUser } from './store/UserRegister/actionCreators'
-import { Dispatch } from 'redux'
 
+
+//Wraps app in a provider tag so that it can use the store
 export const AppWrapper = () => {
   return (
     <Provider store={store}>
       <App/>
     </Provider>
-  )
+  );
 }
 
-//This pulls the information from the store to be rendered (I think)
-const App = () => {
-  const user: IUser = useSelector(
-    (state: IUserState) => state.UserState,
-    shallowEqual
-  )
-  const dispatch: Dispatch<any> = useDispatch()
+//Main component to be rendered, will be able to pull from the store, router will go here as well
+export const App = () => {
+  
+  //gets the user from the store
+  const user: IUser = useSelector( //Allows us to extract data from the store using a selector function. 
+    (state: IUserState) => state.UserState
+  );
 
-  const saveUser = (newUser:any) => {
-    //supposedly this is where we pass our info to the servlet (But we're not using servlets)
-    user.firstName = newUser.firstName
-  };
 
   return(
     <div>
         <h1> Register New User </h1>
-        <AddUser saveUser={saveUser} />
+        <AddUser />
         <p>show me the money: {user.firstName}</p>
     </div>
   )

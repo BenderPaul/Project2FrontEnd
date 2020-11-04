@@ -1,9 +1,7 @@
 import React from 'react';
-import { Dispatch } from 'redux'
-import { useDispatch } from 'react-redux'
-import { IPost } from '../type';
-
-type Props = {
-    post: IPost
-    removePost: (post: IPost) => void
+//placeholder
+export const Props: React.FC = () => {
+    return (
+        <div></div>
+    );
 }

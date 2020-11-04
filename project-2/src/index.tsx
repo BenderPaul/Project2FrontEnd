@@ -1,20 +1,8 @@
 import React from 'react';
-import ReactDOM, { render } from 'react-dom';
-//middleware is custom functionality for redux. Lets your wrap the dispatch method dynamically
-import { createStore, applyMiddleware, Store } from 'redux';
-import { Provider } from 'react-redux';
-// This is the middleware that will be passed in to allow asynchronus code
-import thunk from 'redux-thunk';
-import './index.css';
-import App, { AppWrapper } from './App';
+import ReactDOM from 'react-dom';
+import './index.scss';
+import { AppWrapper } from './App';
 import reportWebVitals from './reportWebVitals';
-// import reducer from './store/UserRegister/reducer'
-
-
-// const store: Store<UserState, UserAction> & {
-//   dispatch: DispatchType
-// } = createStore(reducer, applyMiddleware(thunk))
-
 
 ReactDOM.render(
   <React.StrictMode>
