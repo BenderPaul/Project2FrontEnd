@@ -1,5 +1,5 @@
-import { IPost, PostAction, PostState } from "../../type"
-import * as actionTypes from "./actionTypes"
+import { IPost, PostAction, PostState } from "../interfaces"
+import * as actionTypes from "../action-mappers/postActionTypes"
 
 //Initial state of global feed
 const initialState: PostState = {
@@ -15,7 +15,7 @@ const initialState: PostState = {
 
 // The reducer function
     //The reducer function, in this case, alters the global state
-const reducer = (
+export const postReducer = (
     state: PostState = initialState,
     action: PostAction,
 ): PostState => {

@@ -1,26 +1,38 @@
 import * as React from 'react';
-import { IUser } from '../type';
+import { addUser } from '../action-mappers/userActions';
+import { IUser } from '../interfaces';
+import { store } from '../Store';
 
-//This component renders a form in order to register a new user
 
-type Props = {
-    saveUser: (user: IUser | any) => void
-}
+//Form to register new user
+export const AddUser: React.FC = () => {
 
-//This is clerical stuff to pass information to the store.... I think
-export const AddUser: React.FC<Props> = ({ saveUser }) => {
-    const [user, setUser] = React.useState<IUser | {}>()
+    //object to store user information
+    const activeUser: IUser = {
+        firstName: '',
+        lastName: '',
+        username: '',
+        password: '',
+        email: ''
+    };
 
+    //prevents button from being clicked until information is stored
     const handleUserData = (e: React.FormEvent<HTMLInputElement>) => {
-        setUser({
-            ...user,
-            [e.currentTarget.id]: e.currentTarget.value,
-        })
+        e.preventDefault();
     }
 
-    const addNewUser = (e: React.FormEvent) => {
+    //sets values from form into activeUser, creates the action, and then dispatches to the reducers
+    const addNewUser = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
-        saveUser(user);
+        activeUser.firstName = e.currentTarget["firstName"].value;
+        activeUser.lastName = e.currentTarget["lastName"].value;
+        activeUser.username = e.currentTarget["username"].value;
+        activeUser.password = e.currentTarget["password"].value;
+        activeUser.email = e.currentTarget["email"].value;
+
+        const action = addUser(activeUser);
+
+        store.dispatch(action);
     }
 
         //This is the part thats rendered
@@ -28,40 +40,40 @@ export const AddUser: React.FC<Props> = ({ saveUser }) => {
         <form onSubmit = {addNewUser} className = "addUser">
             <input
                 type = "text"
-                id = "username"
+                name = "username"
                 placeholder = "Username"
                 onChange={handleUserData}
             />
             <br/>
             <input
                 type = "text"
-                id = "password"
+                name = "password"
                 placeholder = "Password"
                 onChange={handleUserData}
             />
             <br/>
             <input
                 type = "text"
-                id = "firstName"
+                name = "firstName"
                 placeholder = "First Name"
                 onChange={handleUserData}
             />
             <br/>
             <input
                 type = "text"
-                id = "lastName"
+                name = "lastName"
                 placeholder = "Last Name"
                 onChange={handleUserData}
             />
             <br/>
             <input
                 type = "text"
-                id = "email"
+                name = "email"
                 placeholder = "Email"
                 onChange={handleUserData}
             />
             <br/>
-            <button disabled = {user === undefined ? true : false}>
+            <button disabled = {activeUser === undefined ? true : false}>
                 Register New User
             </button>
         </form>

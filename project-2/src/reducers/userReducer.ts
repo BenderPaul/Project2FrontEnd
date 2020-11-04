@@ -1,12 +1,9 @@
-import userEvent from "@testing-library/user-event"
-import { IUser, IUserState, UserAction } from "../../type"
-import * as actionTypes from "./actionTypes"
-
+import { IUser } from "../interfaces"
+import * as actionTypes from "../action-mappers/userActionTypes"
 
 //This is the initial state of global users
 const initialState: IUser = {
 
-    id: 0,
     username: "none",
     password: "none",
     firstName: "none",
@@ -16,22 +13,22 @@ const initialState: IUser = {
 }
 // The reducer function 
     //The reducer function, in this case, alters the global state of Users
-export const reducer = (
+export const userReducer = (
     state = initialState,
-    action: UserAction,
+    action:any,
 ) => {
     //Create a switch statement to alter the reducer between ADD and REMOVE action types
     switch (action.type) {
         //If the action is to add a user, take the User props and concat the new user object onto the global state
         case actionTypes.ADD_USER:
             const newUser: IUser = {
-                id: action.user.id,
-                username: action.user.username,
-                password: action.user.password,
-                firstName: action.user.firstName,
-                lastName: action.user.lastName,
-                email: action.user.email,
+                username: action.payload.user.username,
+                password: action.payload.user.password,
+                firstName: action.payload.user.firstName,
+                lastName: action.payload.user.lastName,
+                email: action.payload.user.email,
             }
+            state = newUser;
             return {
                 ...state,
                 newUser

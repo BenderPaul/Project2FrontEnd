@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
-import { addUser } from "../store/UserRegister/actionCreators";
-import { IState } from "../type";
-import { AddUser } from "./AddUser";
+import { addUser } from "../action-mappers/userActions";
+import App from "../App";
+import { IState } from "../interfaces";
 
+//takes in the global state, adds user information from the state
 const mapStateToProps = (state:IState) => {
     return {
-        id: state.UserState.id,
         username: state.UserState.username,
         password: state.UserState.password,
         firstName: state.UserState.firstName,
@@ -14,6 +14,8 @@ const mapStateToProps = (state:IState) => {
     };
 }
 
+//sets action to be used as props
 const mapDispatchToProps = {dispatchEvent: addUser};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddUser);
+//sends full props (state and dispatch action) to component described in second parentheses
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,7 +1,6 @@
 
 //------------------- Global types / function parameters / etc for Users -------------
 export interface IUser {
-    id: number
     username: string
     password: string
     firstName: string
