@@ -4,6 +4,7 @@ import { IUser, IUserState } from './interfaces'
 import { store } from './Store';
 import './App.scss'
 import { AddUser } from './components/AddUser'
+import { Header } from './components/Header';
 
 
 //Wraps app in a provider tag so that it can use the store
@@ -26,10 +27,14 @@ export const App = () => {
 
   return(
     <div>
+      <div>
+        <Header />
+      </div>
         <h1> Register New User </h1>
         <AddUser />
         <p>show me the money: {user.firstName}</p>
     </div>
+
   )
 }
 
