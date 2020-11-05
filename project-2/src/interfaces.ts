@@ -7,9 +7,9 @@ export interface IUser {
     lastName: string
     email: string
 }
-export interface IUserState {
-    UserState: IUser
-}
+// export interface IUserState {
+//     UserState: IUser
+// }
 export interface UserAction {
     type: string
     user: IUser

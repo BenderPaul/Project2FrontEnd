@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { addUser } from '../action-mappers/userActions';
-import { IUser } from '../interfaces';
+import { IState, IUser } from '../interfaces';
 import { store } from '../Store';
 import { Button } from 'reactstrap'
+import { useSelector } from 'react-redux';
 
 
 //Form to register new user
@@ -18,9 +19,14 @@ export const AddUser: React.FC = () => {
     };
 
     //prevents button from being clicked until information is stored
-    const handleUserData = (e: React.FormEvent<HTMLInputElement>) => {
-        e.preventDefault();
-    }
+    // const handleUserData = (e: React.FormEvent<HTMLInputElement>) => {
+    //     e.preventDefault();
+    // }
+
+      //gets the user from the store
+    // const user: IUser = useSelector( //Allows us to extract data from the store using a selector function. 
+    //     (state: IState) => state.UserState
+    // );
 
     //sets values from form into activeUser, creates the action, and then dispatches to the reducers
     const addNewUser = (e: React.SyntheticEvent<HTMLFormElement>) => {
@@ -38,45 +44,49 @@ export const AddUser: React.FC = () => {
 
         //This is the part thats rendered
     return (
-        <form onSubmit = {addNewUser} className = "addUser">
-            <input
-                type = "text"
-                name = "username"
-                placeholder = "Username"
-                onChange={handleUserData}
-            />
-            <br/>
-            <input
-                type = "text"
-                name = "password"
-                placeholder = "Password"
-                onChange={handleUserData}
-            />
-            <br/>
-            <input
-                type = "text"
-                name = "firstName"
-                placeholder = "First Name"
-                onChange={handleUserData}
-            />
-            <br/>
-            <input
-                type = "text"
-                name = "lastName"
-                placeholder = "Last Name"
-                onChange={handleUserData}
-            />
-            <br/>
-            <input
-                type = "text"
-                name = "email"
-                placeholder = "Email"
-                onChange={handleUserData}
-            />
-            <br/>
-            <Button outline color="primary" type="submit" disabled = {activeUser === undefined ? true : false}>
-                Register New User
-            </Button>
-        </form>
+        <div>
+            <h1>Register New User</h1>
+            <form onSubmit = {addNewUser} className = "addUser">
+                <input
+                    type = "text"
+                    name = "username"
+                    placeholder = "Username"
+                    // onChange={handleUserData}
+                />
+                <br/>
+                <input
+                    type = "text"
+                    name = "password"
+                    placeholder = "Password"
+                    // onChange={handleUserData}
+                />
+                <br/>
+                <input
+                    type = "text"
+                    name = "firstName"
+                    placeholder = "First Name"
+                    // onChange={handleUserData}
+                />
+                <br/>
+                <input
+                    type = "text"
+                    name = "lastName"
+                    placeholder = "Last Name"
+                    // onChange={handleUserData}
+                />
+                <br/>
+                <input
+                    type = "text"
+                    name = "email"
+                    placeholder = "Email"
+                    // onChange={handleUserData}
+                />
+                <br/>
+                <Button outline color="primary" type="submit" disabled = {activeUser === undefined ? true : false}>
+                    Register New User
+                </Button>
+            </form>
+            <p>show me the money: {/*user.firstName*/}</p>
+        </div>
     )
 }

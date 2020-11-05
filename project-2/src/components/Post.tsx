@@ -1,7 +1,7 @@
 import React from 'react';
 //placeholder
-export const Props: React.FC = () => {
+export const Post: React.FC = () => {
     return (
-        <div></div>
+        <div>Here in Post</div>
     );
 }
