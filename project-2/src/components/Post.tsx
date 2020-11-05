@@ -14,8 +14,10 @@ export const Post: React.FC = () => {
     )
     return (
         <div>
+
            <h2>Posts</h2>
            {renderedPosts}
+
         </div>
     );
 }
