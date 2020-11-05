@@ -4,11 +4,11 @@ import * as actionTypes from "../action-mappers/userActionTypes"
 //This is the initial state of global users
 const initialState: IUser = {
 
-    username: "none",
-    password: "none",
-    firstName: "none",
-    lastName: "none",
-    email: "none",
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
 
 }
 // The reducer function 
@@ -30,8 +30,7 @@ export const userReducer = (
             }
             state = newUser;
             return {
-                ...state,
-                newUser
+                ...state
             }
         // If the action is to remove a user, then remove the user by prop=ID from the global state    
     //     case actionTypes.REMOVE_USER:
@@ -45,6 +44,6 @@ export const userReducer = (
     // }
     //Return the newly updated state
         default:
-            return state
+            return initialState
     }
 }
