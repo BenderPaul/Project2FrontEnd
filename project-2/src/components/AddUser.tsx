@@ -2,6 +2,7 @@ import * as React from 'react';
 import { addUser } from '../action-mappers/userActions';
 import { IUser } from '../interfaces';
 import { store } from '../Store';
+import { Button } from 'reactstrap'
 
 
 //Form to register new user
@@ -73,9 +74,9 @@ export const AddUser: React.FC = () => {
                 onChange={handleUserData}
             />
             <br/>
-            <button disabled = {activeUser === undefined ? true : false}>
+            <Button outline color="primary" type="submit" disabled = {activeUser === undefined ? true : false}>
                 Register New User
-            </button>
+            </Button>
         </form>
     )
 }
