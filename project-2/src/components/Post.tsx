@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
 import { store } from '../Store';
-//placeholder
+
 export const Post: React.FC = () => {
     const post = store.getState().PostState.posts;
     const renderedPosts = () => (
@@ -11,8 +11,6 @@ export const Post: React.FC = () => {
              <h3>{post.author}</h3>
         </article>
     );
-    
-    
     return (
         <div>
            <h2>Posts</h2>
