@@ -60,4 +60,5 @@ export interface IState {
     UserState: IUser
     PostState: IPostState
     CommentState: ICommentState
+
 }
