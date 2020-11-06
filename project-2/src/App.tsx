@@ -1,13 +1,18 @@
 import React from 'react';
-import { useSelector, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { IState, IUser } from './interfaces';
+import { IUser } from './interfaces';
 import { loadState, store } from './Store';
 import './App.scss';
-import { AddUser } from './components/AddUser';
+import { RegisterUser } from './components/RegisterUser';
 import { Header } from './components/Header';
 import { Post } from './components/Post';
 import { Logout } from './components/Logout';
+import { ErrorPage } from './components/ErrorPage';
+import { Home } from './components/Home';
+import { Profile } from './components/Profile';
+import { Login } from './components/Login';
+import { EditProfile } from './components/EditProfile';
 
 
 
@@ -40,12 +45,14 @@ export const App = () => {
     <BrowserRouter basename="/">
         <Header />
         <Switch>
-          <Route exact path='/' component={Post} />
-          <Route path='/login' component={Post}/>
-          <Route path='/profile'
-            render={() => user.password ? <AddUser/> : <Post/>} />
-          <Route path='/register' component={AddUser} />
+          <Route exact path='/' component={Home} />
+          <Route path='/login' component={Login}/>
+          <Route exact path='/profile'
+            render={() => user.password ? <Profile/> : <Home/>} />
+          <Route path='/profile/edit' component={EditProfile} />
+          <Route path='/register' component={RegisterUser} />
           <Route path='/logout' component={Logout} />
+          <Route component={ErrorPage} />
         </Switch>
         
     </BrowserRouter>

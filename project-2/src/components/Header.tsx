@@ -1,23 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  Collapse,
   Nav,
   Navbar,
   NavbarBrand,
-  NavbarToggler,
   NavItem,
   NavLink,
 } from "reactstrap";
 import logo from "../assets/Logo.png";
+import "../style sheets/Navbar.scss"
 
 //placeholder
 export const Header: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(true);
-  const toggleNavbar = () => setCollapsed(!collapsed);
 
   return (
     <div>
-      <Navbar color="light" light>
+      <Navbar color="light" light expand={true}>
         <NavbarBrand href="/" className="mr-auto">
           <img
             src={ logo }
@@ -28,8 +25,7 @@ export const Header: React.FC = () => {
           />
         </NavbarBrand>
 
-        <NavbarToggler onClick={toggleNavbar} className="mr-2" />
-        <Collapse isOpen={!collapsed} navbar>
+
           <Nav navbar>
             <NavItem>
               <NavLink href="/">Home</NavLink>
@@ -47,7 +43,6 @@ export const Header: React.FC = () => {
                 <NavLink href="/logout">Log Out</NavLink>
             </NavItem>
           </Nav>
-        </Collapse>
       </Navbar>
     </div>
   );
