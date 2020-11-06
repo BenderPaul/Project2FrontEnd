@@ -10,7 +10,7 @@ const enhancer = composeEnhancers();
 
 const saveState = (state:any) => {
     const serializedState = JSON.stringify(state);
-    window.localStorage.setItem("app_state", serializedState);
+    window.sessionStorage.setItem("app_state", serializedState);
 }
 
 
@@ -22,7 +22,7 @@ store.subscribe(() => {
 });
 
 export const loadState = () => {
-    const serializedState = window.localStorage.getItem("app_state");
+    const serializedState = window.sessionStorage.getItem("app_state");
 
     if(!serializedState){
         return undefined;
@@ -32,5 +32,5 @@ export const loadState = () => {
 }
 
 export const clearState = () => {
-    window.localStorage.clear();
+    window.sessionStorage.clear();
 }

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { addUser } from '../action-mappers/userActions';
-import { IState, IUser } from '../interfaces';
+import { IUser } from '../interfaces';
 import { store } from '../Store';
-import { Button } from 'reactstrap'
-import { useSelector } from 'react-redux';
-
+import { Button, Form } from 'reactstrap'
+import "../style sheets/Navbar.scss";
+import RegisterUserContainer from './RegisterUserContainer';
 
 //Form to register new user
-export const AddUser: React.FC = () => {
+export const RegisterUser: React.FC = () => {
 
     //object to store user information
     const activeUser: IUser = {
@@ -23,11 +23,6 @@ export const AddUser: React.FC = () => {
     //     e.preventDefault();
     // }
 
-      //gets the user from the store
-    // const user: IUser = useSelector( //Allows us to extract data from the store using a selector function. 
-    //     (state: IState) => state.UserState
-    // );
-
     //sets values from form into activeUser, creates the action, and then dispatches to the reducers
     const addNewUser = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -40,14 +35,17 @@ export const AddUser: React.FC = () => {
         const action = addUser(activeUser);
 
         store.dispatch(action);
+
+        window.location.pathname = "/";
     }
 
         //This is the part thats rendered
     return (
-        <div>
+        <div className="register">
             <h1>Register New User</h1>
-            <form onSubmit = {addNewUser} className = "addUser">
+            <Form onSubmit = {addNewUser} className = "addUser">
                 <input
+                    className="fInput"
                     type = "text"
                     name = "username"
                     placeholder = "Username"
@@ -55,6 +53,7 @@ export const AddUser: React.FC = () => {
                 />
                 <br/>
                 <input
+                    className="fInput"
                     type = "text"
                     name = "password"
                     placeholder = "Password"
@@ -62,6 +61,7 @@ export const AddUser: React.FC = () => {
                 />
                 <br/>
                 <input
+                    className="fInput"
                     type = "text"
                     name = "firstName"
                     placeholder = "First Name"
@@ -69,6 +69,7 @@ export const AddUser: React.FC = () => {
                 />
                 <br/>
                 <input
+                    className="fInput"
                     type = "text"
                     name = "lastName"
                     placeholder = "Last Name"
@@ -76,17 +77,17 @@ export const AddUser: React.FC = () => {
                 />
                 <br/>
                 <input
+                    className="fInput"
                     type = "text"
                     name = "email"
                     placeholder = "Email"
                     // onChange={handleUserData}
                 />
                 <br/>
-                <Button outline color="primary" type="submit" disabled = {activeUser === undefined ? true : false}>
+                <Button outline color="success" type="submit" disabled = {activeUser === undefined ? true : false}>
                     Register New User
                 </Button>
-            </form>
-            <p>show me the money: {/*user.firstName*/}</p>
+            </Form>
         </div>
     )
 }
