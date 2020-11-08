@@ -10,7 +10,11 @@ export const Post: React.FC = () => {
         <p>{post.body.substring(0, 100)}</p>
              <h3>{post.author}</h3>
         </article>
+<<<<<<< HEAD
     )
+=======
+    );
+>>>>>>> 664636b... changes
     
     
     return (
