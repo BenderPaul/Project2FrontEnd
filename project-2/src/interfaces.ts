@@ -35,4 +35,5 @@ export interface PostAction {
 
 export interface IState {
     UserState: IUser
+    PostState: IPost
 }
