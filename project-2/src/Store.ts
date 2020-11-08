@@ -1,6 +1,7 @@
 import {compose, createStore, Store} from 'redux';
 import { state } from './reducers/index';
 
+
 const composeEnhancers = 
     (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
