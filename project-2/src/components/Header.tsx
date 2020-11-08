@@ -7,7 +7,6 @@ import {
   NavLink,
 } from "reactstrap";
 import logo from "../assets/Logo.png";
-import "../style sheets/Navbar.scss"
 
 //placeholder
 export const Header: React.FC = () => {

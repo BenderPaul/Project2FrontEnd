@@ -3,7 +3,7 @@ import { registerUser } from '../action-mappers/userActions';
 import {  IUser } from '../interfaces';
 import { store } from '../Store';
 import { Button, Form } from 'reactstrap'
-import "../style sheets/Navbar.scss";
+import "../style sheets/Register.scss";
 
 //Form to register new user
 export const RegisterUser: React.FC<IUser> = (props:IUser) => {
@@ -23,71 +23,86 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
         dob: '',
     };
 
+    //prints error message if the passwords do not match
+    const [error, setError] = React.useState("");
+
     //sets values from form into activeUser, creates the action, and then dispatches to the reducers
     const addNewUser = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
-        activeUser.firstName = e.currentTarget["firstName"].value;
-        activeUser.lastName = e.currentTarget["lastName"].value;
-        activeUser.username = e.currentTarget["username"].value;
-        activeUser.password = e.currentTarget["password"].value;
-        activeUser.email = e.currentTarget["email"].value;
+        if (e.currentTarget["password"].value === e.currentTarget["confirmPassword"].value) {
+            if (error) {
+                setError("");
+            }
 
-        const action = registerUser(activeUser);
+            activeUser.username = e.currentTarget["username"].value;
+            activeUser.password = e.currentTarget["password"].value;
+            activeUser.email = e.currentTarget["email"].value;
 
-        store.dispatch(action);
+            const action = registerUser(activeUser);
 
-        //send a request to create user, inform user if the request was successful
+            store.dispatch(action);
+            //send a request to create user, inform user if the request was successful
+        }
+        else {
+            setError("The passwords need to match!");
+        }
+
     }
 
         //This is the part thats rendered
     return (
-        <div className="register">
-            <h1 className="head">Register New User</h1>
-            <Form onSubmit = {addNewUser} className = "addUser">
-                <input
-                    className="fInput"
-                    type = "text"
-                    name = "username"
-                    placeholder = "Username"
-                    required
-                />
-                <br/>
-                <input
-                    className="fInput"
-                    type = "text"
-                    name = "password"
-                    placeholder = "Password"
-                    required
-                />
-                <br/>
-                <div>
-                    <input
-                        className="fInput"
-                        type = "text"
-                        name = "firstName"
-                        placeholder = "First Name"
-                        required
-                    />
-                    <input
-                        className="fInput"
-                        type = "text"
-                        name = "lastName"
-                        placeholder = "Last Name"
-                        required
-                    />
+        <div className="full">
+            <div className="parentRegister">
+                <div className="register">
+                    <h1 className="head">Register New User</h1>
+                    <Form onSubmit = {addNewUser} className = "addUser">
+                        <label className="label">Username:
+                            <input
+                                className="fInput"
+                                type = "text"
+                                name = "username"
+                                id = "username"
+                                placeholder = "Username"
+                                required
+                            />
+                        </label>
+                        <br/>
+                        <label className="label">Email:
+                            <input
+                                className="fInput"
+                                type = "email"
+                                name = "email"
+                                placeholder = "Email"
+                                required
+                            />
+                        </label>
+                        <br/>
+                        <label className="label">Password:
+                            <input
+                                className="fInput"
+                                type = "password"
+                                name = "password"
+                                placeholder = "Password"
+                                required
+                            />
+                        </label>
+                        <br/>
+                        <label className="label">Confirm Password:
+                            <input
+                                className="fInput"
+                                type = "password"
+                                name = "confirmPassword"
+                                placeholder = "Password"
+                                required
+                            />
+                        </label>
+                        <p className="notEqual">{error}</p>
+                        <Button color="warning" type="submit" className="submit">
+                            Register
+                        </Button>
+                    </Form>
                 </div>
-                <input
-                    className="fInput"
-                    type = "text"
-                    name = "email"
-                    placeholder = "Email"
-                    required
-                />
-                <br/>
-                <Button color="success" type="submit" className="submit">
-                    Register New User
-                </Button>
-            </Form>
+            </div>
         </div>
     )
 }
