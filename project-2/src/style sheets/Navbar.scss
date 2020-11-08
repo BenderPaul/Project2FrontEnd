@@ -1,11 +1,36 @@
+
+
 .register {
-    text-align: center;
-    
+    display: grid;
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
+
+
+    background-color: lightslategray;
+    background-clip: border-box;
+    border-radius: 8px;
+
+    // h1{
+    //     position: relative;
+    //     margin: 10px;
+    //     left: 40%;
+    // }
 }
 
 .addUser {
-    .fInput {
-        margin: 10px;
-    }
+
+
+    // .fInput {
+    //     position: relative;
+    //     margin: 10px;
+    //     left: 40%;
+    // }
+
+    // .submit {
+    //     position: relative;
+    //     margin: 20px;
+    //     left: 45%;
+    //     border-radius: 8px;
+    // }
   
 }

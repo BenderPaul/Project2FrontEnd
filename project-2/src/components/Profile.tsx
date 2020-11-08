@@ -9,6 +9,8 @@ export const Profile: React.FC = () => {
                 <li>Ability to edit Profile (different page)</li>
                 <li>View current profile information</li>
             </ul>
+
+            
         </div>
     );
 }
