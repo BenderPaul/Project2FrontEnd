@@ -1,27 +1,27 @@
 import * as React from 'react';
-import { addUser } from '../action-mappers/userActions';
-import { IUser } from '../interfaces';
+import { registerUser } from '../action-mappers/userActions';
+import {  IUser } from '../interfaces';
 import { store } from '../Store';
 import { Button, Form } from 'reactstrap'
 import "../style sheets/Navbar.scss";
-import RegisterUserContainer from './RegisterUserContainer';
 
 //Form to register new user
-export const RegisterUser: React.FC = () => {
+export const RegisterUser: React.FC<IUser> = (props:IUser) => {
 
     //object to store user information
     const activeUser: IUser = {
+        id: 0,
         firstName: '',
         lastName: '',
         username: '',
         password: '',
-        email: ''
+        email: '',
+        phoneNumber: '',
+        occupation: '',
+        bio: '',
+        address: '',
+        dob: '',
     };
-
-    //prevents button from being clicked until information is stored
-    // const handleUserData = (e: React.FormEvent<HTMLInputElement>) => {
-    //     e.preventDefault();
-    // }
 
     //sets values from form into activeUser, creates the action, and then dispatches to the reducers
     const addNewUser = (e: React.SyntheticEvent<HTMLFormElement>) => {
@@ -32,24 +32,24 @@ export const RegisterUser: React.FC = () => {
         activeUser.password = e.currentTarget["password"].value;
         activeUser.email = e.currentTarget["email"].value;
 
-        const action = addUser(activeUser);
+        const action = registerUser(activeUser);
 
         store.dispatch(action);
 
-        window.location.pathname = "/";
+        //send a request to create user, inform user if the request was successful
     }
 
         //This is the part thats rendered
     return (
         <div className="register">
-            <h1>Register New User</h1>
+            <h1 className="head">Register New User</h1>
             <Form onSubmit = {addNewUser} className = "addUser">
                 <input
                     className="fInput"
                     type = "text"
                     name = "username"
                     placeholder = "Username"
-                    // onChange={handleUserData}
+                    required
                 />
                 <br/>
                 <input
@@ -57,34 +57,34 @@ export const RegisterUser: React.FC = () => {
                     type = "text"
                     name = "password"
                     placeholder = "Password"
-                    // onChange={handleUserData}
+                    required
                 />
                 <br/>
-                <input
-                    className="fInput"
-                    type = "text"
-                    name = "firstName"
-                    placeholder = "First Name"
-                    // onChange={handleUserData}
-                />
-                <br/>
-                <input
-                    className="fInput"
-                    type = "text"
-                    name = "lastName"
-                    placeholder = "Last Name"
-                    // onChange={handleUserData}
-                />
-                <br/>
+                <div>
+                    <input
+                        className="fInput"
+                        type = "text"
+                        name = "firstName"
+                        placeholder = "First Name"
+                        required
+                    />
+                    <input
+                        className="fInput"
+                        type = "text"
+                        name = "lastName"
+                        placeholder = "Last Name"
+                        required
+                    />
+                </div>
                 <input
                     className="fInput"
                     type = "text"
                     name = "email"
                     placeholder = "Email"
-                    // onChange={handleUserData}
+                    required
                 />
                 <br/>
-                <Button outline color="success" type="submit" disabled = {activeUser === undefined ? true : false}>
+                <Button color="success" type="submit" className="submit">
                     Register New User
                 </Button>
             </Form>
