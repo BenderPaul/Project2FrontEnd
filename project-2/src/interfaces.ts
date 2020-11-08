@@ -23,7 +23,7 @@ export interface IPost {
     title: string
     body: string
 }
-export interface PostState {
+export interface IPostState {
     posts: IPost[]
 }
 export interface PostAction {
@@ -35,5 +35,5 @@ export interface PostAction {
 
 export interface IState {
     UserState: IUser,
-    PostState: IPost
+    PostState: IPostState
 }

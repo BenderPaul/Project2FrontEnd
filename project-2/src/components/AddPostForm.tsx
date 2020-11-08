@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 
 export const AddPostForm = () => {
   const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
+  const [body, setBody] = useState('')
 
-  const onTitleChanged = (e) => setTitle(e.target.value)
-  const onContentChanged = (e) => setContent(e.target.value)
+  const onTitleChanged = (e:any) => setTitle(e.target.value)
+  const onContentChanged = (e:any) => setBody(e.target.value)
 
   return (
       <section>
@@ -23,7 +23,7 @@ export const AddPostForm = () => {
               <textarea
                 id="postContent"
                 name="postContent"
-                value={content}
+                value={body}
                 onChange={onContentChanged}
               />
              <button type="button">Save Post</button>     

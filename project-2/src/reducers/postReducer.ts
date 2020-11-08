@@ -1,8 +1,8 @@
-import { IPost, PostAction, PostState } from "../interfaces"
+import { IPost, PostAction, IPostState } from "../interfaces"
 import * as actionTypes from "../action-mappers/postActionTypes"
 
 //Initial state of global feed
-const initialState: PostState = {
+const initialState: IPostState = {
     posts: [
         {
             postId: 0,
@@ -16,9 +16,9 @@ const initialState: PostState = {
 // The reducer function
     //The reducer function, in this case, alters the global state
 export const postReducer = (
-    state: PostState = initialState,
+    state: IPostState = initialState,
     action: PostAction,
-): PostState => {
+): IPostState => {
     console.log("in post");
     switch (action.type) {
     //Switch statement to dictate between adding and removing posts
