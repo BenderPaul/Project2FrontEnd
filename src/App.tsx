@@ -47,7 +47,7 @@ export const App = () => {
 
   //MAJORITY OF POST COMPONENTS ARE JUST PLACEHOLDERS
   return(
-    <Provider store={store}>
+
       <BrowserRouter basename="/">
           <Header />
           <Switch>
@@ -62,7 +62,7 @@ export const App = () => {
           </Switch>
           
       </BrowserRouter>
-    </Provider>
+
 
   )
 }

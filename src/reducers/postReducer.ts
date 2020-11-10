@@ -20,7 +20,7 @@ export const postReducer = (
     state: IPostState = initialState,
     action: PostAction,
 ): IPostState => {
-    console.log("in post");
+    console.log("in post reducer");
     switch (action.type) {
     //Switch statement to dictate between adding and removing posts
     case actionTypes.ADD_POST:
@@ -44,5 +44,6 @@ export const postReducer = (
             posts: updatedPosts,
         }
     }
+    
     return state
 }

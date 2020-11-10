@@ -4,6 +4,7 @@ import {  IUser } from '../interfaces';
 import { store } from '../Store';
 import { Button, Form } from 'reactstrap'
 import "../style sheets/Register.scss";
+import Axios from 'axios';
 
 //Form to register new user
 export const RegisterUser: React.FC<IUser> = (props:IUser) => {
@@ -27,7 +28,7 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
     const [error, setError] = React.useState("");
 
     //sets values from form into activeUser, creates the action, and then dispatches to the reducers
-    const addNewUser = (e: React.SyntheticEvent<HTMLFormElement>) => {
+    const addNewUser = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (e.currentTarget["password"].value === e.currentTarget["confirmPassword"].value) {
             if (error) {
@@ -40,8 +41,19 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
 
             const action = registerUser(activeUser);
 
-            store.dispatch(action);
+            const response = await Axios.post('http://localhost:8080/Project2/user/newuser', activeUser);
+
+            if(await response){
+                store.dispatch(action);
+                window.location.pathname = "/profile/edit";
+            }
+            else {
+                setError("Username and/or email has been taken.");
+            }
+
             //send a request to create user, inform user if the request was successful
+            // const json = await JSON.stringify(response.data);
+            // console.log(json);
         }
         else {
             setError("The passwords need to match!");
