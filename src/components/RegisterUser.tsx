@@ -41,7 +41,7 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
 
             const action = registerUser(activeUser);
 
-            const response = await Axios.post('http://localhost:8080/Project2/user/newuser', activeUser);
+            const response = await Axios.post('http://34.211.139.29:8081/StickyDB/user/newuser', activeUser);
 
             if(await response){
                 store.dispatch(action);

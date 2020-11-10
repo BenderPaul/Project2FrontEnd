@@ -1,6 +1,16 @@
-import React from 'react';
+import Axios from 'axios';
+import React, { useState } from 'react';
+import { IUser } from '../interfaces';
+import { loadState } from '../Store';
 
 export const Profile: React.FC = () => {
+
+    const [userProfile, setUserProfile] = useState(null);
+
+    const refresh = (user:IUser = loadState()) => {
+        console.log(user.username);
+    }
+
     return (
         <div>
             <ul>

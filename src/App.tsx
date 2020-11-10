@@ -12,17 +12,8 @@ import { Home } from './components/Home';
 import { Profile } from './components/Profile';
 import { Login } from './components/Login';
 import { EditProfile } from './components/EditProfile';
+import HomeContainer from './components/HomeContainer';
 
-
-
-//Wraps app in a provider tag so that it can use the store
-// export const AppWrapper = () => {
-//   return (
-//     <Provider store={store}>
-//       <App/>
-//     </Provider>
-//   );
-// }
 
 //Main component to be rendered, will be able to pull from the store, router will go here as well
 export const App = () => {

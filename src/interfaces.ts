@@ -14,6 +14,10 @@ export interface IUser {
     dob: string
 }
 
+export interface IUserState {
+    user: IUser
+}
+
 export interface UserAction {
     type: string
     user: IUser
