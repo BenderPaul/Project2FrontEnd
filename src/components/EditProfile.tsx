@@ -20,17 +20,6 @@ export const EditProfile: React.FC = () => {
     //     address: loadState().UserState.address
     // }
 
-    // window.onload = async () => {
-    //     const response = await Axios.get('http://localhost:8080/Project2/user/findbyusername', {
-    //         params: {
-    //             user: currentUser
-    //         }
-    //     });
-
-    //     console.log(response.data);
-    // }
-    // console.log(loadState().UserState.username);
-    
     //this is for testing purposes
     const activeUser:IUser = {
         id: 0,
@@ -45,7 +34,18 @@ export const EditProfile: React.FC = () => {
         address: store.getState().UserState.address,
         dob: store.getState().UserState.dob,
     };
-    
+
+    // window.onload = async () => {
+        // const response = await Axios.get('http://localhost:8080/Project2/user/findbyusername', {
+        //     params: {
+        //         user: activeUser
+        //     }
+        // });
+        // activeUser = response.data;
+        // console.log(response.data);
+    // }
+    // console.log(loadState().username);
+
     //prints error message if the passwords do not match
     const [error, setError] = React.useState("");
 
