@@ -1,33 +1,36 @@
 import Axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'reactstrap';
-import { IUser } from '../interfaces';
+import { baseUrl, IUser } from '../interfaces';
 import '../style sheets/Post.scss';
 
-
-export const Post: React.FC<IUser> = (props:IUser) => {
+export const Post: React.FC<IUser[]> = (props:IUser[]) => {
     const [rendered, setRendered] = useState([] as JSX.Element[]);
 
-
-    async function getPosts() {
+    const getPosts = async () => {
         let component:JSX.Element[] = [];
 
         if(window.location.pathname === "/") {
-            const url = props.username ? `http://34.211.139.29:8081/StickyDB/post/searchbyusername?username=${props.username}` : "http://34.211.139.29:8081/StickyDB/post/allposts";
-            const response = await Axios.get(url);
+            //iterates through the user array
+            for(const i in props){
+                const url = props[i].username ? `${baseUrl}/post/searchbyusername?username=${props[i].username}` : `${baseUrl}/post/allposts`;
+                const response = await Axios.get(url);
+            
 
-            for(const index in response.data){
-                component.push(
-                    <div className = "postRectangle" key={index}>
-                        <div className="title">{response.data[index].title}</div>
-                        <div className="body">{response.data[index].body.substring(0, 100)}</div>
-                        <div className="username">{response.data[index].author.username}</div>
-                    </div>
-                )
+                for(const index in response.data){
+                    console.log(index);
+                    component.push(
+                        <div className = "postRectangle" key={index}>
+                            <div className="title">{response.data[index].title}</div>
+                            <div className="body">{response.data[index].body.substring(0, 100)}</div>
+                            <div className="username">{response.data[index].author.username}</div>
+                        </div>
+                    );
+                }
             }
         }
         else {
-            const response = await Axios.post("http://34.211.139.29:8081/StickyDB/post/findpostsbyuser", props.username);
+            const response = await Axios.post(`${baseUrl}/post/findpostsbyuser`, props[0].username);
 
             for(const index in response.data){
                 component.push(

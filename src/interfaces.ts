@@ -81,4 +81,5 @@ export interface IState {
 
 }
 
-
+//base url of the EC2 instance
+export const baseUrl = "http://54.201.97.129:8081/StickyDB";

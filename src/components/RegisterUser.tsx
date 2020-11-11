@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { registerUser } from '../action-mappers/userActions';
-import {  IUser } from '../interfaces';
+import {  baseUrl, IUser } from '../interfaces';
 import { store } from '../Store';
 import { Button, Form } from 'reactstrap'
 import "../style sheets/Register.scss";
@@ -41,7 +41,7 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
 
             const action = registerUser(activeUser);
 
-            const response = await Axios.post('http://34.211.139.29:8081/StickyDB/user/newuser', activeUser);
+            const response = await Axios.post(`${baseUrl}/user/newuser`, activeUser);
 
             if(response){
                 store.dispatch(action);

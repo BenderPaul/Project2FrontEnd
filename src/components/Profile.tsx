@@ -1,26 +1,20 @@
 import Axios from 'axios';
 import React, { useState } from 'react';
-import { emptyUser } from '../interfaces';
+import { baseUrl, emptyUser, IUser } from '../interfaces';
 import { loadState } from '../Store';
+import { ActiveUserCard } from './ActiveUserCard';
 
 export const Profile: React.FC = () => {
 
-    console.log("here")
-
     const [userProfile, setUserProfile] = useState(emptyUser);
+    //const [currUsername, setCurrUsername] = useState(loadState());
 
-    console.log(loadState());
-
-    const getUser = async (username = loadState()) => {
-        const response = await Axios.post(`http://34.211.139.29:8081/StickyDB/user/findbyusername`, {
-            params: {
-                username: username
-            }
-        });
-        setUserProfile(response.data[0]);
+    const getUser = async () => {
+        const response = await Axios.get(`${baseUrl}/user/findbyusername?username=${loadState()}`);
+        setUserProfile(await response.data);
     }
 
-    getUser();
+    window.onload = getUser;
 
 
 
@@ -33,25 +27,34 @@ export const Profile: React.FC = () => {
                 <li>View current profile information</li>
             </ul>
 
-            <h1>
+            <ActiveUserCard {...userProfile}/>
+
+            {/* <h1>
                 Name: {userProfile.firstName} {userProfile.lastName}
+                <br/>
             </h1>
             <h3>
                 Email: {userProfile.email}
+                <br/>
             </h3>
             <h4>
                 Username: {userProfile.username}
+                <br/>
                 Phone Number: {userProfile.phoneNumber}
+                <br/>
                 Address: {userProfile.address}
+                <br/>
             </h4>
             <br/><br/>
             <h3>
                 Birthday: {userProfile.dob}
+                <br/>
                 Occupation: {userProfile.occupation}
+                <br/>
             </h3>
             <h3>
                 Bio: {userProfile.bio}
-            </h3>
+            </h3> */}
         </div>
     );
 }
