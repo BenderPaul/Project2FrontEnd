@@ -1,38 +1,28 @@
 import Axios from 'axios';
-import React from 'react';
-import { IUser } from '../interfaces';
+import React, { useState } from 'react';
+import { Form, Input } from 'reactstrap';
+import { emptyUser, IUser } from '../interfaces';
 import { loadState } from '../Store';
 
 export const EditProfile: React.FC = () => {
 
-    // const currentUser:IUser = {
-    //     id: 0,
-    //     username: loadState().UserState.username,
-    //     password: "",
-    //     firstName: loadState().UserState.firstName,
-    //     lastName: loadState().UserState.lastName,
-    //     email: loadState().UserState.email,
-    //     phoneNumber: loadState().UserState.phoneNumber,
-    //     occupation: loadState().UserState.occupation,
-    //     bio: loadState().UserState.bio,
-    //     dob: loadState().UserState.dob,
-    //     address: loadState().UserState.address
-    // }
+    // const [userInfo, setUserInfo] = useState(null);
+
+    // const currentUser:IUser = emptyUser;
+    // currentUser.username = loadState() ? loadState().username : "";
+ 
 
     // window.onload = async () => {
-    //     const response = await Axios.get('http://localhost:8080/Project2/user/findbyusername', {
+    //     const response = await Axios.get('http://34.211.139.29:8081/StickyDB/user/findbyusername', {
     //         params: {
-    //             user: currentUser
+    //             username: currentUser.username
     //         }
     //     });
 
-    //     console.log(response.data);
+    //     setUserInfo(response.data[0]);
     // }
-    // console.log(loadState().UserState.username);
 
     return (
-        <div>
-            Allows users to edit their profile information
-        </div>
+        <div></div>
     );
 }

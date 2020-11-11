@@ -43,17 +43,13 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
 
             const response = await Axios.post('http://34.211.139.29:8081/StickyDB/user/newuser', activeUser);
 
-            if(await response){
+            if(response){
                 store.dispatch(action);
                 window.location.pathname = "/profile/edit";
             }
             else {
                 setError("Username and/or email has been taken.");
             }
-
-            //send a request to create user, inform user if the request was successful
-            // const json = await JSON.stringify(response.data);
-            // console.log(json);
         }
         else {
             setError("The passwords need to match!");
