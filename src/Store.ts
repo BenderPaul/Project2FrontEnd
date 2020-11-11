@@ -1,5 +1,6 @@
 
 import {compose, createStore, Store} from 'redux';
+import { IState } from './interfaces';
 import { state } from './reducers/index';
 
 
@@ -17,7 +18,7 @@ const saveState = (state:any) => {
 
 
 //reference to global store, call this to dispatch actions
-export const store: Store<any> = createStore(state, enhancer);
+export const store: Store<IState> = createStore(state, enhancer);
 
 store.subscribe(() => {
     saveState(store.getState().UserState.username);

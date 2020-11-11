@@ -12,7 +12,7 @@ import logo from "../assets/Logo.png";
 export const Header: React.FC = () => {
 
   return (
-    <div>
+    <div className="navContainer">
       <Navbar color="light" light expand={true}>
         <NavbarBrand href="/" className="mr-auto">
           <img

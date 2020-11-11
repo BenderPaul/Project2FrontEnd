@@ -1,6 +1,7 @@
 import Axios from 'axios';
-import React from 'react';
-import { IUser } from '../interfaces';
+import React, { useState } from 'react';
+import { Form, Input } from 'reactstrap';
+import { emptyUser, IUser } from '../interfaces';
 import { loadState } from '../Store';
 import { store } from '../Store';
 import { updateUser } from '../action-mappers/userActions';

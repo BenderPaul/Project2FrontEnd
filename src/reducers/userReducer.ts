@@ -1,19 +1,22 @@
-import { IUser, UserAction } from "../interfaces"
+import { IUser, IUserState, UserAction } from "../interfaces"
 import * as actionTypes from "../action-mappers/userActionTypes"
+
 
 //This is the initial state of user
 const initialState: IUser = {
-    id: 0,
-    username: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "", 
-    occupation: "",
-    bio: "",
-    address: "",
-    dob: ""
+
+        id: 0,
+        username: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "", 
+        occupation: "",
+        bio: "",
+        address: "",
+        dob: ""
+
 
 }
 // The reducer function 
@@ -30,8 +33,8 @@ export const userReducer = (
                 id: 0,
                 username: action.user.username,
                 password: action.user.password,
-                firstName: action.user.firstName,
-                lastName: action.user.lastName,
+                firstName: "",
+                lastName: "",
                 email: action.user.email,
                 phoneNumber: "", 
                 occupation: "",
@@ -40,8 +43,9 @@ export const userReducer = (
                 dob: ""
             }
             state = newUser;
+            console.log(newUser);
             return {
-                ...state
+                ...newUser
             }
         case actionTypes.UPDATE_USER:
             const updatedUser: IUser = {

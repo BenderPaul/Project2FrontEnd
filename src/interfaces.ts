@@ -14,9 +14,27 @@ export interface IUser {
     dob: string
 }
 
+export interface IUserState {
+    user: IUser
+}
+
 export interface UserAction {
     type: string
     user: IUser
+}
+
+export const emptyUser:IUser =  {
+    id: 0,
+    firstName: '',
+    lastName: '',
+    username: '',
+    password: '',
+    email: '',
+    phoneNumber: '',
+    occupation: '',
+    bio: '',
+    address: '',
+    dob: '',
 }
 //export type DispatchType = (args: UserAction) => UserAction
 //-------------------------------------------------------------------------------------
@@ -62,3 +80,5 @@ export interface IState {
     CommentState: ICommentState
 
 }
+
+
