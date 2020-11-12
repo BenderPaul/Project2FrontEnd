@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardImg, CardText, CardTitle, CardBody, CardLink, ListGroupItem, ListGroup, Collapse} from 'reactstrap';
+import { Card, CardText, CardTitle, CardBody, CardLink, ListGroupItem, ListGroup, Collapse} from 'reactstrap';
 import { IUser } from '../interfaces';
 
 
@@ -9,7 +9,7 @@ export const ActiveUserCard: React.FC<IUser> = (props: IUser) => {
 
     return(
         <Card style={{ width: '18rem' }}>
-        <img width="250" src={props.profilePicture}/>
+        <img width="250" src={props.profilePicture} alt=""/>
         {/* <CardImg height="30%" width="30%" variant="top" src={props.profilePicture} /> */}
         <CardBody>
             <CardTitle>{props.username}</CardTitle>

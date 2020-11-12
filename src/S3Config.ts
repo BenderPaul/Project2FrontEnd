@@ -1,6 +1,6 @@
 import AWS from 'aws-sdk';
 import S3 from 'aws-sdk/clients/s3';
-import React from 'react'
+//import React from 'react'
 
 
 
