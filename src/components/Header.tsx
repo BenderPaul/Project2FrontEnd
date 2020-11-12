@@ -8,7 +8,6 @@ import {
 } from "reactstrap";
 import logo from "../assets/Logo.png";
 
-//placeholder
 export const Header: React.FC = () => {
 
   return (

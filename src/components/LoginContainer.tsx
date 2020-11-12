@@ -1,6 +1,5 @@
 
 import { IState } from "../interfaces";
-import { loginAction } from "../action-mappers/loginAction";
 import { connect } from "react-redux";
 import LoginComponent from "./Login";
 
@@ -11,6 +10,5 @@ const mapStateToProps = (state: IState) => {
     }
 }
 
-const mapDispatchToProps = {loginAction}
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
+export default connect(mapStateToProps)(LoginComponent);

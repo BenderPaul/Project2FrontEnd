@@ -8,8 +8,8 @@ const mapStateToProps = (state:IState) => {
     return {
         username: state.UserState.username,
         password: state.UserState.password,
-        firstName: state.UserState.firstName,
-        lastName: state.UserState.lastName,
+        firstName: state.UserState.firstname,
+        lastName: state.UserState.lastname,
         email: state.UserState.email
     };
 }

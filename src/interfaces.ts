@@ -4,14 +4,15 @@ export interface IUser {
     id: number
     username: string
     password: string
-    firstName: string
-    lastName: string
+    firstname: string
+    lastname: string
     email: string
     phoneNumber: string
     occupation: string
     bio: string
     address: string
     dob: string
+    profilePicture: string
 }
 
 export interface IUserState {
@@ -25,8 +26,8 @@ export interface UserAction {
 
 export const emptyUser:IUser =  {
     id: 0,
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
     username: '',
     password: '',
     email: '',
@@ -35,16 +36,18 @@ export const emptyUser:IUser =  {
     bio: '',
     address: '',
     dob: '',
+    profilePicture: ''
 }
 //export type DispatchType = (args: UserAction) => UserAction
 //-------------------------------------------------------------------------------------
 
 export interface IPost {
     postId: number
-    author: string
+    author: IUser
     title: string
     body: string
     likes: number
+    uploadedImage: string
 }
 export interface IPostState {
     posts: IPost[]
@@ -81,4 +84,5 @@ export interface IState {
 
 }
 
-
+//base url of the EC2 instance
+export const baseUrl = "http://54.201.97.129:8081/StickyDB";

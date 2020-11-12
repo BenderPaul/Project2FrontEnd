@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { registerUser } from '../action-mappers/userActions';
-import {  IUser } from '../interfaces';
+import {  baseUrl, emptyUser, IUser } from '../interfaces';
 import { store } from '../Store';
 import { Button, Form } from 'reactstrap'
 import "../style sheets/Register.scss";
@@ -10,49 +10,32 @@ import Axios from 'axios';
 export const RegisterUser: React.FC<IUser> = (props:IUser) => {
 
     //object to store user information
-    const activeUser: IUser = {
-        id: 0,
-        firstName: '',
-        lastName: '',
-        username: '',
-        password: '',
-        email: '',
-        phoneNumber: '',
-        occupation: '',
-        bio: '',
-        address: '',
-        dob: '',
-    };
+    const activeUser: IUser = emptyUser;
 
     //prints error message if the passwords do not match
-    const [error, setError] = React.useState("");
 
     //sets values from form into activeUser, creates the action, and then dispatches to the reducers
     const addNewUser = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (e.currentTarget["password"].value === e.currentTarget["confirmPassword"].value) {
-            if (error) {
-                setError("");
-            }
-
             activeUser.username = e.currentTarget["username"].value;
             activeUser.password = e.currentTarget["password"].value;
             activeUser.email = e.currentTarget["email"].value;
 
             const action = registerUser(activeUser);
 
-            const response = await Axios.post('http://34.211.139.29:8081/StickyDB/user/newuser', activeUser);
+            const response = await Axios.post(`${baseUrl}/user/newuser`, activeUser);
 
             if(response){
                 store.dispatch(action);
                 window.location.pathname = "/profile/edit";
             }
             else {
-                setError("Username and/or email has been taken.");
+                alert("Username and/or email has been taken.");
             }
         }
         else {
-            setError("The passwords need to match!");
+            alert("The passwords need to match!");
         }
 
     }
@@ -104,7 +87,6 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
                                 required
                             />
                         </label>
-                        <p className="notEqual">{error}</p>
                         <Button color="warning" type="submit" className="submit">
                             Register
                         </Button>

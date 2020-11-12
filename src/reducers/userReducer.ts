@@ -1,24 +1,9 @@
-import { IUser, IUserState, UserAction } from "../interfaces"
+import { emptyUser, IUser, UserAction } from "../interfaces"
 import * as actionTypes from "../action-mappers/userActionTypes"
 
 
 //This is the initial state of user
-const initialState: IUser = {
-
-        id: 0,
-        username: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        phoneNumber: "", 
-        occupation: "",
-        bio: "",
-        address: "",
-        dob: ""
-
-
-}
+const initialState: IUser = emptyUser;
 // The reducer function 
     //The reducer function, in this case, alters the global state of Users
 export const userReducer = (
@@ -29,19 +14,7 @@ export const userReducer = (
     switch (action.type) {
         //If the action is to add a user, take the User props and concat the new user object onto the global state
         case actionTypes.REGISTER_USER:
-            const newUser: IUser = {
-                id: 0,
-                username: action.user.username,
-                password: action.user.password,
-                firstName: "",
-                lastName: "",
-                email: action.user.email,
-                phoneNumber: "", 
-                occupation: "",
-                bio: "",
-                address: "",
-                dob: ""
-            }
+            const newUser: IUser = emptyUser;
             state = newUser;
             console.log(newUser);
             return {
@@ -52,31 +25,20 @@ export const userReducer = (
                 id: action.user.id,
                 username: action.user.username,
                 password: action.user.password,
-                firstName: action.user.firstName,
-                lastName: action.user.lastName,
+                firstname: action.user.firstname,
+                lastname: action.user.lastname,
                 email: action.user.email,
                 phoneNumber: action.user.phoneNumber,
                 occupation: action.user.occupation,
                 bio: action.user.bio,
                 address: action.user.address,
                 dob: action.user.dob,
+                profilePicture: action.user.profilePicture
             }
             
             return {
                 ...updatedUser
             }
-
-        // If the action is to remove a user, then remove the user by prop=ID from the global state    
-    //     case actionTypes.REMOVE_USER:
-    //         const updatedUsers: IUser[] = state.users.filter(
-    //             user => user.id !== action.user.id,
-    //         )
-    //         return {
-    //             ...state,
-    //             users: updatedUsers,
-    //         }
-    // }
-    //Return the newly updated state
         default:
             return initialState
     }

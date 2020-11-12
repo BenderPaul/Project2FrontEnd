@@ -10,7 +10,7 @@ const composeEnhancers =
 //custom middleware for dispatching
 const enhancer = composeEnhancers();
 
-const saveState = (state:any) => {
+export const saveState = (state:any) => {
     const serializedState = JSON.stringify(state);
     window.sessionStorage.setItem("app_state", serializedState);
 }

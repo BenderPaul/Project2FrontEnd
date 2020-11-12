@@ -11,30 +11,19 @@ import { Profile } from './components/Profile';
 import { Login } from './components/Login';
 import { EditProfile } from './components/EditProfile';
 
+export const isFoo = (testString: string) => {
+  if (testString === "foo") {
+      return true
+  }
+  return false
+}
 
 //Main component to be rendered, will be able to pull from the store, router will go here as well
 export const App = () => {
 
-  //Empty user, only used when a user is not logged in
-  // const emptyUser: IUser = {
-  //   id: 0,
-  //   username: "",
-  //   password: "",
-  //   firstName: "",
-  //   lastName: "",
-  //   email: "",
-  //   phoneNumber: "",
-  //   occupation: "",
-  //   bio: "",
-  //   address: "",
-  //   dob: ""
-  // }
-
   //checks if the state is empty or not, returns the user if not
   const user = loadState() ? loadState() : "";
 
-
-  //MAJORITY OF POST COMPONENTS ARE JUST PLACEHOLDERS
   return(
 
       <BrowserRouter basename="/">
@@ -43,7 +32,7 @@ export const App = () => {
             <Route exact path='/' component={Home} />
             <Route path='/login' component={Login}/>
             <Route exact path='/profile'
-              render={() => user ? <Profile/> : <Home/>} />
+              render={() => user ? <Profile/> : window.location.pathname = "/"} />
             <Route path='/profile/edit' component={EditProfile} />
             <Route path='/register' component={RegisterUser} />
             <Route path='/logout' component={Logout} />
