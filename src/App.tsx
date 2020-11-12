@@ -10,6 +10,7 @@ import { Home } from './components/Home';
 import { Profile } from './components/Profile';
 import { Login } from './components/Login';
 import { EditProfile } from './components/EditProfile';
+import { ForgotPassword } from './components/ForgotPassword';
 
 export const isFoo = (testString: string) => {
   if (testString === "foo") {
@@ -30,12 +31,16 @@ export const App = () => {
           <Header />
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/login' component={Login}/>
+            <Route path='/login' 
+              render={() => user ? window.location.pathname = "/profile" : <Login/>}/>
             <Route exact path='/profile'
               render={() => user ? <Profile/> : window.location.pathname = "/"} />
-            <Route path='/profile/edit' component={EditProfile} />
-            <Route path='/register' component={RegisterUser} />
+            <Route path='/profile/edit' 
+              render={() => user ? <EditProfile/> : window.location.pathname = "/"} />
+            <Route path='/register' 
+              render={() => user ? window.location.pathname = "/profile" : <RegisterUser {...user}/>} />
             <Route path='/logout' component={Logout} />
+            <Route path='/forgot' component={ForgotPassword} />
             <Route component={ErrorPage} />
           </Switch>
           

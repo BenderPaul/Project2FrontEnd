@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     card: {
      marginTop: theme.spacing(10)
+    },
+    forgot: {
+      textAlign: "center"
     }
   })
 );
@@ -94,6 +97,8 @@ export const Login: React.FC = () => {
                 Login
             </Button>
             </CardActions>
+
+            <a id="forgot" className={classes.forgot} href="/forgot">Forgot Password?</a>
         </Card>
         </form>
     </div>

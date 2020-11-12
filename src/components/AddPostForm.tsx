@@ -4,6 +4,7 @@ import React from 'react'
 import { baseUrl, emptyUser, IPost, IUser } from '../interfaces'
 import { config } from '../S3Config'
 import { loadState } from '../Store'
+import { Button, Form } from 'reactstrap'
 import "../style sheets/AddPost.scss";
 
 export const AddPostForm: React.FC = () =>{ 
@@ -33,38 +34,44 @@ export const AddPostForm: React.FC = () =>{
 
     //I'm trying to get the picture going here
     //Only attempts to upload a picture if needed
-    if(target["uploadImg"]){
-        const theFile:File = target["uploadImg"].files[0];
+    try {
+      if(target["uploadImg"]){
+          const theFile:File = target["uploadImg"].files[0];
 
-        // const s3 = new S3(config);
-        
-        const fileName = theFile.name;
+          // const s3 = new S3(config);
+          
+          const fileName = theFile.name;
 
-        const upload = new S3.ManagedUpload({
-            params: {
-                Bucket: 'the-react-project-profile-info',
-                Key: fileName,
-                Body: theFile,
-                ACL: "public-read"
-            }
-        });
+          const upload = new S3.ManagedUpload({
+              params: {
+                  Bucket: 'the-react-project-profile-info',
+                  Key: fileName,
+                  Body: theFile,
+                  ACL: "public-read"
+              }
+          });
 
-        const promise = upload.promise();
+          const promise = upload.promise();
 
-        if (await promise) {
-            newPost.uploadedImage = `https://the-react-project-profile-info.s3-us-west-2.amazonaws.com/${fileName}`;
-        
-            Axios.post(`${baseUrl}/post/create`, newPost);
-        }
-    } else {
-        const response = await Axios.post(`${baseUrl}/post/create`, newPost);
+          if (await promise) {
+              newPost.uploadedImage = `https://the-react-project-profile-info.s3-us-west-2.amazonaws.com/${fileName}`;
+          
+              Axios.post(`${baseUrl}/post/create`, newPost);
+          }
+      } else {
+          const response = await Axios.post(`${baseUrl}/post/create`, newPost);
 
-        if(await response){
-            window.location.pathname = "/profile";
-        }
-        else {
-            alert("Problem occurred.");
-        }
+          if(await response){
+              window.location.pathname = "/profile";
+          }
+          else {
+              alert("Problem occurred.");
+          }
+      }
+      
+      alert("Post successfully created!");
+    } catch (err){
+      alert("Problem occurred: " + err.message);
     }
 
   }
@@ -72,28 +79,41 @@ export const AddPostForm: React.FC = () =>{
 
       return (
           <section>
+            <div className="title">
               <h2>Add a New Post</h2>
-              <form onSubmit={addNewPost}>
-                  <label htmlFor="postTitle">Post Title: </label>
+            </div>  
+              <Form onSubmit={addNewPost}>
+                  <br/>
+                  <label htmlFor="postTitle"><h6>Post Title:  </h6></label>
                   <input
                     type="text"
                     id="postTitle"
                     name="postTitle"
                     placeholder="Add your title"
                   />
-                  <label htmlFor="postBody">Body: </label>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <label htmlFor="postBody"><h6>Body:  </h6></label>
                   <textarea
                     id="postContent"
                     name="postContent"
                     placeholder="Add your content"
                   />
-                  <label>Upload Image: </label>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <label><h6>Upload Image:  </h6></label>
                   <input type="file" 
                   id="uploadImg"
                   name = "uploadImg"
+                  defaultValue=""
                   />
-                <button type="submit" className="submit" >Save Post</button>     
-              </form>
+                  <br/>
+                  <br/>
+                  <br/>
+                <Button type="submit" className="sub" color="warning">Save Post</Button>     
+              </Form>
           </section>
       );
   

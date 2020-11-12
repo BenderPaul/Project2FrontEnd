@@ -5,6 +5,8 @@ import { store } from '../Store';
 import { Button, Form } from 'reactstrap'
 import "../style sheets/Register.scss";
 import Axios from 'axios';
+import AWS from 'aws-sdk';
+import { sesConfig } from '../S3Config';
 
 //Form to register new user
 export const RegisterUser: React.FC<IUser> = (props:IUser) => {
@@ -22,17 +24,28 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
             activeUser.password = e.currentTarget["password"].value;
             activeUser.email = e.currentTarget["email"].value;
 
-            const action = registerUser(activeUser);
+            const SES = new AWS.SES(sesConfig);
 
-            const response = await Axios.post(`${baseUrl}/user/newuser`, activeUser);
+            SES.verifyEmailIdentity({
+                EmailAddress: activeUser.email
+            }, async function(err, data) {
+                if (err) console.error("Could not verify email: ", err.stack);
+                else {
+                    alert("Check your email to verify your account!")
+                    const action = registerUser(activeUser);
 
-            if(response){
-                store.dispatch(action);
-                window.location.pathname = "/profile/edit";
-            }
-            else {
-                alert("Username and/or email has been taken.");
-            }
+                    const response = await Axios.post(`${baseUrl}/user/newuser`, activeUser);
+
+                    if(response){
+                        store.dispatch(action);
+                        window.location.pathname = "/profile/edit";
+                    }
+                    else {
+                        alert("Username and/or email has been taken.");
+                    }
+                
+                };
+            });
         }
         else {
             alert("The passwords need to match!");
@@ -42,11 +55,11 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
 
         //This is the part thats rendered
     return (
-        <div className="full">
-            <div className="parentRegister">
-                <div className="register">
-                    <h1 className="head">Register New User</h1>
-                    <Form onSubmit = {addNewUser} className = "addUser">
+        <div id="full">
+            <div id="parentRegister">
+                <div id="register">
+                    <h1 id="head">Register New User</h1>
+                    <Form data-testid="registerForm" onSubmit = {addNewUser} id = "addUser">
                         <label className="label">Username:
                             <input
                                 className="fInput"
@@ -87,7 +100,8 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
                                 required
                             />
                         </label>
-                        <Button color="warning" type="submit" className="submit">
+                        <br/>
+                        <Button color="warning" type="submit" id="submit">
                             Register
                         </Button>
                     </Form>

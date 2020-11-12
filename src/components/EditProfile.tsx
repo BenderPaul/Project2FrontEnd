@@ -143,7 +143,7 @@ export const EditProfile: React.FC = () => {
                         </div>
                         <br/>
                         <div className="labelAndInput">
-                            <button type="submit" className="submit">Update</button>
+                            <button type="submit" className="profileSubmit">Update</button>
                         </div>
                     </form>
                 </div>
