@@ -1,4 +1,4 @@
-import { emptyUser, IUser, IUserState, UserAction } from "../interfaces"
+import { emptyUser, IUser, UserAction } from "../interfaces"
 import * as actionTypes from "../action-mappers/userActionTypes"
 
 
@@ -39,18 +39,6 @@ export const userReducer = (
             return {
                 ...updatedUser
             }
-
-        // If the action is to remove a user, then remove the user by prop=ID from the global state    
-    //     case actionTypes.REMOVE_USER:
-    //         const updatedUsers: IUser[] = state.users.filter(
-    //             user => user.id !== action.user.id,
-    //         )
-    //         return {
-    //             ...state,
-    //             users: updatedUsers,
-    //         }
-    // }
-    //Return the newly updated state
         default:
             return initialState
     }

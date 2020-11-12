@@ -13,16 +13,11 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
     const activeUser: IUser = emptyUser;
 
     //prints error message if the passwords do not match
-    const [error, setError] = React.useState("");
 
     //sets values from form into activeUser, creates the action, and then dispatches to the reducers
     const addNewUser = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (e.currentTarget["password"].value === e.currentTarget["confirmPassword"].value) {
-            if (error) {
-                setError("");
-            }
-
             activeUser.username = e.currentTarget["username"].value;
             activeUser.password = e.currentTarget["password"].value;
             activeUser.email = e.currentTarget["email"].value;
@@ -36,11 +31,11 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
                 window.location.pathname = "/profile/edit";
             }
             else {
-                setError("Username and/or email has been taken.");
+                alert("Username and/or email has been taken.");
             }
         }
         else {
-            setError("The passwords need to match!");
+            alert("The passwords need to match!");
         }
 
     }
@@ -92,7 +87,6 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
                                 required
                             />
                         </label>
-                        <p className="notEqual">{error}</p>
                         <Button color="warning" type="submit" className="submit">
                             Register
                         </Button>

@@ -1,8 +1,7 @@
 import Axios from 'axios';
 import React, { useState } from 'react';
-import { baseUrl, emptyUser, IUser } from '../interfaces';
-import { loadState, store } from '../Store';
-import { updateUser } from '../action-mappers/userActions';
+import { baseUrl, emptyUser } from '../interfaces';
+import { loadState } from '../Store';
 import "../style sheets/EditProfile.scss";
 import { config } from '../S3Config';
 import { S3 } from 'aws-sdk/clients/all';
@@ -25,8 +24,6 @@ export const EditProfile: React.FC = () => {
     const updateUserInfo = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
         const target = e.currentTarget;
-        let returnedData;
-
         const AWS = require('aws-sdk');
 
         if(target["password"].value === target["confirmPassword"].value){
@@ -37,12 +34,12 @@ export const EditProfile: React.FC = () => {
         
             //I'm trying to get the picture going here
             //Only attempts to upload a picture if needed
-            if(target["profPic"]){
+            if(target["profPic"].value){
                 const theFile:File = target["profPic"].files[0];
 
                 console.log(theFile);
 
-                const s3 = new S3(config);
+                // const s3 = new S3(config);
                 
                 const fileName = theFile.name;
 
@@ -66,7 +63,7 @@ export const EditProfile: React.FC = () => {
                 const response = await Axios.post(`${baseUrl}/user/update`, userProfile);
 
                 if(await response){
-                    //window.location.pathname = "/profile";
+                    window.location.pathname = "/profile";
                 }
                 else {
                     alert("Username and/or email has been taken.");
@@ -124,7 +121,7 @@ export const EditProfile: React.FC = () => {
                         </div>
                         <div className="labelAndInput">
                             <label>Bio:</label>
-                            <input type="text" defaultValue={userProfile.bio}
+                            <input type="textarea" defaultValue={userProfile.bio}
                             onChange={(eve) => {userProfile.bio = eve.target.value}}/>
                         </div>
                         <div className="labelAndInput">
@@ -138,6 +135,7 @@ export const EditProfile: React.FC = () => {
                             <input type="file" 
                             id="uploadFile"
                             name = "profPic"
+                            defaultValue=""
                             />
                         </div>
                         <div className="labelAndInput">

@@ -1,9 +1,11 @@
-import React from 'react';
-import { Card, CardImg, CardText, CardTitle, CardBody, CardLink, ListGroupItem, ListGroup} from 'reactstrap';
+import React, { useState } from 'react';
+import { Card, CardImg, CardText, CardTitle, CardBody, CardLink, ListGroupItem, ListGroup, Collapse} from 'reactstrap';
 import { IUser } from '../interfaces';
 
 
 export const ActiveUserCard: React.FC<IUser> = (props: IUser) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const toggle = () => setIsOpen(!isOpen);
 
     return(
         <Card style={{ width: '18rem' }}>
@@ -11,13 +13,15 @@ export const ActiveUserCard: React.FC<IUser> = (props: IUser) => {
         {/* <CardImg height="30%" width="30%" variant="top" src={props.profilePicture} /> */}
         <CardBody>
             <CardTitle>{props.username}</CardTitle>
-            <CardText>
-                {props.bio}
-            </CardText>
+            <CardTitle onClick={toggle} >Bio:</CardTitle>
+            <Collapse isOpen={!isOpen}>
+                <CardText>
+                    {props.bio}
+                </CardText>
+            </Collapse>
         </CardBody>
         <ListGroup className="list-group-flush">
-            <ListGroupItem>{props.firstname}</ListGroupItem>
-            <ListGroupItem>{props.lastname}</ListGroupItem>
+            <ListGroupItem>{props.firstname} {props.lastname}</ListGroupItem>
             <ListGroupItem>{props.dob}</ListGroupItem>
         </ListGroup>
         <CardBody>

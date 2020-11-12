@@ -1,10 +1,9 @@
 import Axios from 'axios';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Input } from 'reactstrap';
 import { baseUrl, emptyUser } from '../interfaces';
 import { Post } from './Post';
 import '../style sheets/Home.scss';
-import { ActiveUserCard } from './ActiveUserCard';
 export const Home: React.FC = () => {
 
     const [users, setUsers] = useState([emptyUser]);
@@ -13,8 +12,6 @@ export const Home: React.FC = () => {
         e.preventDefault();
         const response = await Axios.get(`${baseUrl}/user/search?username=${e.currentTarget["search"].value}`);
         setUsers(response.data);
-        // window.location.reload();
-        console.log(users);
     }
 
     return (
