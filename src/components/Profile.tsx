@@ -17,7 +17,7 @@ export const Profile: React.FC = () => {
         setUserProfile(await response.data);
     }
 
-    window.onload = getUser;
+    window.onload = getUser; 
 
 
 
