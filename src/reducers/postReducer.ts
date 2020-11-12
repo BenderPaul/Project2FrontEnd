@@ -1,4 +1,4 @@
-import { IPost, PostAction, IPostState } from "../interfaces"
+import { IPost, PostAction, IPostState, emptyUser } from "../interfaces"
 import * as actionTypes from "../action-mappers/postActionTypes"
 
 //Initial state of global feed
@@ -6,10 +6,11 @@ const initialState: IPostState = {
     posts: [
         {
             postId: 0,
-            author: "none",
+            author: emptyUser,
             title: "none",
             body: "none",
-            likes: 0
+            likes: 0,
+            uploadedImage: ''
         },
     ],
 }
@@ -29,7 +30,8 @@ export const postReducer = (
             author: action.post.author,
             title: action.post.title,
             body: action.post.body,
-            likes: action.post.likes
+            likes: action.post.likes,
+            uploadedImage: action.post.uploadedImage
         }
         return {
             ...state,

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { registerUser } from '../action-mappers/userActions';
-import {  baseUrl, IUser } from '../interfaces';
+import {  baseUrl, emptyUser, IUser } from '../interfaces';
 import { store } from '../Store';
 import { Button, Form } from 'reactstrap'
 import "../style sheets/Register.scss";
@@ -10,19 +10,7 @@ import Axios from 'axios';
 export const RegisterUser: React.FC<IUser> = (props:IUser) => {
 
     //object to store user information
-    const activeUser: IUser = {
-        id: 0,
-        firstName: '',
-        lastName: '',
-        username: '',
-        password: '',
-        email: '',
-        phoneNumber: '',
-        occupation: '',
-        bio: '',
-        address: '',
-        dob: '',
-    };
+    const activeUser: IUser = emptyUser;
 
     //prints error message if the passwords do not match
     const [error, setError] = React.useState("");

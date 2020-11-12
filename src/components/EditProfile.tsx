@@ -4,24 +4,14 @@ import { baseUrl, emptyUser, IUser } from '../interfaces';
 import { loadState, store } from '../Store';
 import { updateUser } from '../action-mappers/userActions';
 import "../style sheets/EditProfile.scss";
+import { config } from '../S3Config';
+import { S3 } from 'aws-sdk/clients/all';
+
 
 export const EditProfile: React.FC = () => {
-    //this is for testing purposes
 
     const [userProfile, setUserProfile] = useState(emptyUser);
-    // const activeUser:IUser = {
-    //     id: 0,
-    //     firstName: store.getState().UserState.firstName,
-    //     lastName: store.getState().UserState.lastName,
-    //     username: store.getState().UserState.username,
-    //     password: store.getState().UserState.password,
-    //     email: store.getState().UserState.email,
-    //     phoneNumber: store.getState().UserState.phoneNumber,
-    //     occupation: store.getState().UserState.occupation,
-    //     bio: store.getState().UserState.bio,
-    //     address: store.getState().UserState.address,
-    //     dob: store.getState().UserState.dob,
-    // };
+
     const getUser = async () => {
         const response = await Axios.get(`${baseUrl}/user/findbyusername?username=${loadState()}`);
         setUserProfile(await response.data);
@@ -34,92 +24,127 @@ export const EditProfile: React.FC = () => {
 
     const updateUserInfo = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(e.currentTarget["password"].value === e.currentTarget["confirmPassword"].value){
+        const target = e.currentTarget;
+        let returnedData;
+
+        const AWS = require('aws-sdk');
+
+        if(target["password"].value === target["confirmPassword"].value){
             if (error) {
                 setError("");
             }
-            const action = updateUser(userProfile);
-            const response = await Axios.post(`${baseUrl}/user/update`, userProfile);
-    
-            if(await response){
-                store.dispatch(action);
-                window.location.pathname = "/profile";
-            }
-            else {
-                setError("Username and/or email has been taken.");
+            AWS.config.update(config);
+        
+            //I'm trying to get the picture going here
+            //Only attempts to upload a picture if needed
+            if(target["profPic"]){
+                const theFile:File = target["profPic"].files[0];
+
+                console.log(theFile);
+
+                const s3 = new S3(config);
+                
+                const fileName = theFile.name;
+
+                const upload = new S3.ManagedUpload({
+                    params: {
+                        Bucket: 'the-react-project-profile-info',
+                        Key: fileName,
+                        Body: theFile,
+                        ACL: "public-read"
+                    }
+                });
+
+                const promise = upload.promise();
+
+                if (await promise) {
+                    userProfile.profilePicture = `https://the-react-project-profile-info.s3-us-west-2.amazonaws.com/${fileName}`;
+                
+                    Axios.post(`${baseUrl}/user/update`, userProfile);
+                }
+            } else {
+                const response = await Axios.post(`${baseUrl}/user/update`, userProfile);
+
+                if(await response){
+                    //window.location.pathname = "/profile";
+                }
+                else {
+                    alert("Username and/or email has been taken.");
+                }
             }
         }
     }
 
-    const [selectedFile, setSelectedFile] = React.useState("");
 
     return (
         <div className="fullEditProfile">
             <div className="parentEditProfile">
                 <div className="editProfile">
+                    <h1>Edit Profile</h1>
                   <form onSubmit={updateUserInfo} className="updateUser">
-                        <div>
+                        <div className="labelAndInput">
                             <label>Username:</label>
                             <input type="text" defaultValue={userProfile.username}
                             onChange={(eve) => {userProfile.username = eve.target.value}}/>
                         </div>
-                        <div>
+                        <div className="labelAndInput">
                             <label>New Password:</label>
                             <input type="password" name="password" defaultValue={""}
                             onChange={(eve) => {userProfile.password = eve.target.value}}/>
                         </div>
-                        <div>
+                        <div className="labelAndInput">
                             <label>Confirm Password:</label>
                             <input type="password" name="confirmPassword" defaultValue={""}
                             />
                         </div>
-                        <div>
+                        <div className="labelAndInput">
                             <label>First Name:</label>
-                            <input type="text" defaultValue={userProfile.firstName}
-                            onChange={(eve) => {userProfile.firstName = eve.target.value}}/>
+                            <input type="text" defaultValue={userProfile.firstname}
+                            onChange={(eve) => {userProfile.firstname = eve.target.value}}/>
                         </div>
-                        <div>
+                        <div className="labelAndInput">
                         <label>Last Name:</label>
-                            <input type="text" defaultValue={userProfile.lastName}
-                            onChange={(eve) => {userProfile.lastName = eve.target.value}}/>
+                            <input type="text" defaultValue={userProfile.lastname}
+                            onChange={(eve) => {userProfile.lastname = eve.target.value}}/>
                         </div>
-                        <div>
+                        <div className="labelAndInput">
                             <label>Email:</label>
                             <input type="text" defaultValue={userProfile.email}
                             onChange={(eve) => {userProfile.email = eve.target.value}}/>
                         </div>
-                        <div>
+                        <div className="labelAndInput">
                             <label>Phone Number:</label>
                             <input type="text" defaultValue={userProfile.phoneNumber}
                             onChange={(eve) => {userProfile.phoneNumber = eve.target.value}}/>
                         </div>
-                        <div>
+                        <div className="labelAndInput">
                             <label>Occupation:</label>
                             <input type="text" defaultValue={userProfile.occupation}
                             onChange={(eve) => {userProfile.occupation = eve.target.value}}/>    
                         </div>
-                        <div>
+                        <div className="labelAndInput">
                             <label>Bio:</label>
                             <input type="text" defaultValue={userProfile.bio}
                             onChange={(eve) => {userProfile.bio = eve.target.value}}/>
                         </div>
-                        <div>
+                        <div className="labelAndInput">
                             <label>Address:</label>
                             <input type="text" defaultValue={userProfile.address}
                             onChange={(eve) => {userProfile.address = eve.target.value}}/>
                         </div>
-                        <div>
+                        <br/>
+                        <div className="labelAndInput">
                             <label>Upload Profile Pic:</label>
                             <input type="file" 
                             id="uploadFile"
-                            value={selectedFile}
-                            onChange={(eve) => setSelectedFile(eve.target.value)}
+                            name = "profPic"
                             />
                         </div>
-                        <div>
+                        <div className="labelAndInput">
                             <p className="notEqual">{error}</p>
                         </div>
-                        <div>
+                        <br/>
+                        <div className="labelAndInput">
                             <button type="submit" className="submit">Update</button>
                         </div>
                     </form>

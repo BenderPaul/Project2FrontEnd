@@ -7,7 +7,8 @@ export const ActiveUserCard: React.FC<IUser> = (props: IUser) => {
 
     return(
         <Card style={{ width: '18rem' }}>
-        <CardImg variant="top" src="https://s3.console.aws.amazon.com/s3/buckets/the-react-project-profile-info?region=us-west-2&tab=objects" />
+        <img width="250" src={props.profilePicture}/>
+        {/* <CardImg height="30%" width="30%" variant="top" src={props.profilePicture} /> */}
         <CardBody>
             <CardTitle>{props.username}</CardTitle>
             <CardText>
@@ -15,8 +16,8 @@ export const ActiveUserCard: React.FC<IUser> = (props: IUser) => {
             </CardText>
         </CardBody>
         <ListGroup className="list-group-flush">
-            <ListGroupItem>{props.firstName}</ListGroupItem>
-            <ListGroupItem>{props.lastName}</ListGroupItem>
+            <ListGroupItem>{props.firstname}</ListGroupItem>
+            <ListGroupItem>{props.lastname}</ListGroupItem>
             <ListGroupItem>{props.dob}</ListGroupItem>
         </ListGroup>
         <CardBody>

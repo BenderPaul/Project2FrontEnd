@@ -2,6 +2,7 @@ import S3 from 'aws-sdk/clients/s3';
 import React from 'react'
 
 
+
 export const config = {
     bucketName: 'the-react-project-profile-info',
     region: 'us-west-2',

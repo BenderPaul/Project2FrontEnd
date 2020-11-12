@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import { baseUrl, emptyUser, IUser } from '../interfaces';
 import { loadState } from '../Store';
 import { ActiveUserCard } from './ActiveUserCard';
+import { AddPostForm } from './AddPostForm';
+import '../style sheets/Profile.scss';
+import { CardGroup } from 'reactstrap';
 
 export const Profile: React.FC = () => {
 
@@ -19,16 +22,23 @@ export const Profile: React.FC = () => {
 
 
     return (
-        <div>
+        <div className="fullProfile">
             <ul>
                 Includes:
                 <li>User's posts</li>
                 <li>Ability to edit Profile (different page)</li>
                 <li>View current profile information</li>
             </ul>
-
-            <ActiveUserCard {...userProfile}/>
-
+            <CardGroup>
+                <ActiveUserCard {...userProfile}/>
+                <AddPostForm />
+            </CardGroup>
+            <div className="profileInfo">
+                
+            </div>
+            <div className="addPost">
+                
+            </div>
             {/* <h1>
                 Name: {userProfile.firstName} {userProfile.lastName}
                 <br/>

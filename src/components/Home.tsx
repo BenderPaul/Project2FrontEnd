@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Form, Button, Input } from 'reactstrap';
 import { baseUrl, emptyUser } from '../interfaces';
 import { Post } from './Post';
@@ -13,6 +13,8 @@ export const Home: React.FC = () => {
         e.preventDefault();
         const response = await Axios.get(`${baseUrl}/user/search?username=${e.currentTarget["search"].value}`);
         setUsers(response.data);
+        // window.location.reload();
+        console.log(users);
     }
 
     return (
@@ -21,7 +23,8 @@ export const Home: React.FC = () => {
                 <Input type="text" placeholder="Search users" className="mr-sm-2" name="search"/>
                 <Button type="submit" variant="outline-primary">Search</Button>
             </Form>
-            <Post {...users}/>
+            <br/>
+            <Post {...users} />
         </div>
     )
 }

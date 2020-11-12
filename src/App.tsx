@@ -11,6 +11,12 @@ import { Profile } from './components/Profile';
 import { Login } from './components/Login';
 import { EditProfile } from './components/EditProfile';
 
+export const isFoo = (testString: string) => {
+  if (testString === "foo") {
+      return true
+  }
+  return false
+}
 
 //Main component to be rendered, will be able to pull from the store, router will go here as well
 export const App = () => {
