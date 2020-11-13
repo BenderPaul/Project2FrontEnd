@@ -1,3 +1,18 @@
+
+#grid-container {
+    margin-left: 20px;
+    justify-content: space-between;
+
+    #profile-search {
+        margin-top: -30rem;
+        margin-left: 100px;
+        #search-bar {
+            margin-left: 600px;
+            padding: 3rem;
+        }
+    }
+}
+
 .searchBar{
     margin-left: 1rem;
 }

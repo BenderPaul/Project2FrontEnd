@@ -110,6 +110,11 @@ export const EditProfile: React.FC = () => {
                             onChange={(eve) => {userProfile.email = eve.target.value}}/>
                         </div>
                         <div className="labelAndInput">
+                            <label>Date of Birth:</label>
+                            <input type="text" defaultValue={userProfile.dob}
+                            onChange={(eve) => {userProfile.dob = eve.target.value}}/>
+                        </div>
+                        <div className="labelAndInput">
                             <label>Phone Number:</label>
                             <input type="text" defaultValue={userProfile.phoneNumber}
                             onChange={(eve) => {userProfile.phoneNumber = eve.target.value}}/>

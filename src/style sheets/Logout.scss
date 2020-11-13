@@ -1,8 +1,24 @@
-
 .logout{
+    background-clip: border-box;
+    background-color:  #c4a0e6;
+    border-radius: 8px;
     display:grid;
+    margin-top: 5%;
     margin-left: auto;
     margin-right: auto;
     width: 45rem;
     text-align: center;
+}
+
+.logoutButton {
+    border-radius: 8px;
+    color: white;
+    background-color: #2D3538;
+    border-color: #2D3538;
+  }
+
+.logoutButton:hover{
+    color: #2D3538;
+    background-color: white;
+    border-color: white;
 }

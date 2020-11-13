@@ -21,3 +21,26 @@
     background-color: darkslategray;
     border-color: darkslategray;
 }
+
+#cardContainer{
+    padding: 5rem;
+    display: inline;
+    position: relative;
+    float: left;
+    font-weight: bold;
+
+    #card {
+      box-shadow: 5px 10px #2e2e2ec2;
+      #username{
+        text-align: center;
+      }
+
+      #profileImage{
+        padding-top: 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+}
+

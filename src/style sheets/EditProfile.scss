@@ -73,12 +73,15 @@
                     margin-bottom: 10px;
                     float: right;
                     border-radius: 8px;
+                    color: white;
+                    background-color: #2D3538;
+                    border-color: #2D3538;
                 }
 
                 .profileSubmit:hover{
-                    color: white;
-                    background-color: darkslategray;
-                    border-color: darkslategray;
+                    color: #2D3538;
+                    background-color: white;
+                    border-color: white;
                 }
             }
         }

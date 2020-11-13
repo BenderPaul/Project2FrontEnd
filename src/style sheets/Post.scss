@@ -1,7 +1,20 @@
 
 .title{grid-area: title;}
+
+.postImage{
+  grid-area: postImage;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .body{grid-area: body;}
 .likes{grid-area: likes;}
+
+.likesButton{
+  grid-area: likesButton;
+}
+
 .username{grid-area: username;}
 
 .postRectangle{
@@ -15,8 +28,9 @@
     padding: 20px;
     grid-template-areas:
       'title title title title title title'
+      'postImage postImage postImage postImage postImage postImage'
       'body body body body body body'
-      'username username username username username username';
+      'username username username likes likes likes';
 
     background-color: rgb(196, 160, 230);
     text-align: center;

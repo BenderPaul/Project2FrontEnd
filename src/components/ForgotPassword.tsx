@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Form, Input } from 'reactstrap';
 import { baseUrl, emptyUser } from '../interfaces';
 import { sesConfig } from '../S3Config';
+import "../style sheets/ForgotPassword.scss";
 
 export const ForgotPassword: React.FC = () => {
 
@@ -52,23 +53,30 @@ export const ForgotPassword: React.FC = () => {
         Axios.get(`${baseUrl}/user/findbyemail?email=${email}`)
             .then((response) => setUser(response.data))
             .then(() => user.password = "1234")
-            .then(() => Axios.post(`${baseUrl}/user/update`, user));
+            .then(() => Axios.post(`${baseUrl}/user/update`, user))
+            .then(() => window.location.pathname = "/");
     }
 
     return (
         <div>
-            <h3 id="forgot">Forgot Password</h3>
+            <h3 id="forgot" className="forgotTitle">Forgot Your Password?</h3>
+            <br/>
             <Form onSubmit={sendEmail}>
-                <label id="label">Enter your email: 
+                <br/>
                     <Input 
                         type="email"
                         name="email"
                         defaultValue=""
+                        className="emailBar"
+                        placeholder="Email"
                     />
-                    <Input
-                        type="submit"
-                    />
-                </label>
+                    <br/>
+                    <div id="forgot-button">
+                        <input
+                            type="submit"
+                            className="submitInput"
+                        />
+                    </div>
             </Form>
         </div>
     );

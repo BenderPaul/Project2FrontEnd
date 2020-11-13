@@ -30,16 +30,17 @@ export const App = () => {
       <BrowserRouter basename="/">
           <Header />
           <Switch>
-            <Route exact path='/' component={Home} />
-            <Route path='/login' 
-              render={() => user ? window.location.pathname = "/profile" : <Login/>}/>
-            <Route exact path='/profile'
+            <Route exact path='/' component={Login} />
+            <Route path='/home' 
+              render={() => user ? <Home /> : window.location.pathname = "/"}/>
+            <Route exact path='/profile' 
               render={() => user ? <Profile/> : window.location.pathname = "/"} />
             <Route path='/profile/edit' 
               render={() => user ? <EditProfile/> : window.location.pathname = "/"} />
             <Route path='/register' 
               render={() => user ? window.location.pathname = "/profile" : <RegisterUser {...user}/>} />
-            <Route path='/logout' component={Logout} />
+            <Route path='/logout' 
+              render={() => user ? <Logout/> : window.location.pathname = "/"} />
             <Route path='/forgot' component={ForgotPassword} />
             <Route component={ErrorPage} />
           </Switch>

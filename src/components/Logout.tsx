@@ -7,9 +7,11 @@ export const Logout: React.FC = () => {
     clearState();
 
     return (
-        <div className="logout">
-            <h1>You have logged out</h1>
-            <Button outline className="danger" href="/" >Return Home</Button>
+        <div>
+            <div className="logout">
+                <h1>You have logged out</h1>
+                <Button outline className="logoutButton" href="/" >Return Home</Button>
+            </div>
         </div>
     )
 }

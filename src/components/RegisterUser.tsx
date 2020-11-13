@@ -23,6 +23,7 @@ export const RegisterUser: React.FC<IUser> = (props:IUser) => {
             activeUser.username = e.currentTarget["username"].value;
             activeUser.password = e.currentTarget["password"].value;
             activeUser.email = e.currentTarget["email"].value;
+            activeUser.profilePicture = "https://the-react-project-profile-info.s3-us-west-2.amazonaws.com/defaultPic.jpg";
 
             const SES = new AWS.SES(sesConfig);
 

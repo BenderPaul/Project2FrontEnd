@@ -1,18 +1,23 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button } from 'reactstrap';
-import { baseUrl, IUser } from '../interfaces';
+import { baseUrl, IPost, IUser } from '../interfaces';
 import '../style sheets/Post.scss';
 
 export const Post: React.FC<IUser[]> = (props:IUser[]) => {
     const [rendered, setRendered] = useState([] as JSX.Element[]);
 
 
+    const handleClick = (post:IPost) => {
+
+        post.likes += 1;
+    }
+
     useEffect(() => {
         const getPosts = async () => {
             let component:JSX.Element[] = [];
     
-            if(window.location.pathname === "/") {
+            if(window.location.pathname === "/home") {
                 //iterates through the user array
                 for(const i in props){
                     const url = props[i].username ? `${baseUrl}/post/findpostsbyuser?username=${props[i].username}` : `${baseUrl}/post/allposts`;
@@ -25,7 +30,7 @@ export const Post: React.FC<IUser[]> = (props:IUser[]) => {
                         component.push(
                             <div className = "postRectangle" key={index}>
                                 <div className="title">{await response.data[index].title}</div>
-                                <img className="image" width="250" src={await response.data[index].uploadedImage} alt=""></img>
+                                <img className="postImage" width="250" src={await response.data[index].uploadedImage} alt=""></img>
                                 <div className="body">{await response.data[index].body}</div>
                                 <div className="username">{await response.data[index].author.username}</div>
                                 <div className="likes">Likes: {await response.data[index].likes}</div>

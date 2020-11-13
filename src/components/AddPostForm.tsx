@@ -78,39 +78,37 @@ export const AddPostForm: React.FC = () =>{
 
 
       return (
-          <section>
-            <div className="title">
+          <section id="newPostWrapper">
+            <div className="TitlePost">
               <h2>Add a New Post</h2>
-            </div>  
+            </div> 
               <Form onSubmit={addNewPost}>
+                  <label htmlFor="postTitle" ><h6>Post Title:  </h6></label>
                   <br/>
-                  <label htmlFor="postTitle"><h6>Post Title:  </h6></label>
                   <input
                     type="text"
                     id="postTitle"
                     name="postTitle"
+                    className="postBar"
                     placeholder="Add your title"
-                  />
-                  <br/>
-                  <br/>
+                  /> 
                   <br/>
                   <label htmlFor="postBody"><h6>Body:  </h6></label>
+                  <br/>
                   <textarea
                     id="postContent"
                     name="postContent"
+                    className="postBar"
                     placeholder="Add your content"
                   />
                   <br/>
+                  <label htmlFor="file" className="uploadImg"><h6>Upload Image:  </h6></label>
                   <br/>
-                  <br/>
-                  <label><h6>Upload Image:  </h6></label>
                   <input type="file" 
                   id="uploadImg"
                   name = "uploadImg"
                   defaultValue=""
                   />
-                  <br/>
-                  <br/>
                   <br/>
                 <Button type="submit" className="sub" color="warning">Save Post</Button>     
               </Form>

@@ -26,16 +26,16 @@ export const Header: React.FC = () => {
 
           <Nav navbar>
             <NavItem>
-              <NavLink href="/">Home</NavLink>
+              <NavLink href="/home">Home</NavLink>
             </NavItem>
             <NavItem>
-                <NavLink href="/login">Log In</NavLink>
+                <NavLink href="/">Log In</NavLink>
             </NavItem>
             <NavItem>
                 <NavLink href="/profile">My Profile</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/register">Register New User</NavLink>
+              <NavLink href="/register">Register</NavLink>
             </NavItem>
             <NavItem>
                 <NavLink href="/logout">Log Out</NavLink>

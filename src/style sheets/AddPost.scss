@@ -1,6 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Bitter:400,700);
 
 
+
 h2{
     text-decoration: underline;
     margin: 50px auto;
@@ -8,7 +9,7 @@ h2{
     text-shadow: 2px 2px 0px mediumorchid;
     color: rgb(0, 0, 0);
     opacity: 0.4;
-    font: 100 50px 'Bitter';
+    font: 100 30px 'Bitter';
 }
 
 
@@ -19,7 +20,7 @@ h6{
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3), 1px 1px 0px mediumorchid;
     color: black;
     opacity: 0.4;
-    font: 50 30px 'Bitter';
+    font: 50 20px 'Bitter';
 }
 
 .sub {
@@ -28,5 +29,40 @@ h6{
     margin: 20px;
     border-radius: 8px;
     font-size: 20px;
+    color: white;
+    background-color: #2D3538;
+    border-color: #2D3538;
 }
+
+.sub:hover {
+    position: relative;
+    left: 35%;
+    margin: 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    color: #2D3538;
+    background-color: white;
+    border-color: white;
+}
+
+.postBar {
+    width: 400px;
+    height: 60px;
+    border: 6px solid #3D484C;
+    background: #2D3538;
+    margin: 0 0 5px;
+    padding: 17px;
+    border-radius: 5px;
+    font-size: 12px;
+    padding-right: 30px;
+    color: #DDD;
+    background: #2D3538 url(http://picbox.im/image/cba14e57f0-validicon.png) no-repeat 99% 50%;
+    background-position: right 6px center;
+}
+
+#addPostWrapper{
+    position: relative;
+    float: right;
+}
+
 
