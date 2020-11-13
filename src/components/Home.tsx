@@ -9,8 +9,6 @@ export const Home: React.FC = () => {
 
     
     const [users, setUsers] = useState([emptyUser]);
- 
-    const [renderProfile, setRenderProfile] = useState(false);
 
     const searchForUser = async (e:React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -19,13 +17,6 @@ export const Home: React.FC = () => {
 
         const response = await Axios.get(`${baseUrl}/user/search?username=${searched}`);
         setUsers(response.data);
-
-        if(searched) {
-            setRenderProfile(true);
-        }
-        else{
-            setRenderProfile(false);
-        }
     }
 
     return (

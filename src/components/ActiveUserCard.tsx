@@ -11,7 +11,7 @@ export const ActiveUserCard: React.FC<IUser> = (props: IUser) => {
     return(
         <div id="cardContainer">
             <Card style={{ backgroundColor: '#c4a0e6', width: '18rem' }} id="card">
-                <img width="250" src={props.profilePicture} alt='Missing: Profile Picture' id="profileImage"/>
+                <img width="250" src={props.profilePicture} alt='Missing' id="profileImage"/>
                 <CardBody>
                 <CardTitle id="username">{props.username}</CardTitle>
                 <CardTitle>BIO: <i className="arrow down" onClick={toggle}></i>

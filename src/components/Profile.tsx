@@ -6,7 +6,7 @@ import { AddPostForm } from './AddPostForm';
 import '../style sheets/Profile.scss';
 import { CardGroup } from 'reactstrap';
 import { Post } from './Post';
-import { Card, CardText, CardTitle, CardBody, CardLink, ListGroupItem, ListGroup, Collapse} from 'reactstrap';
+import { Card, CardText, CardTitle, CardBody, ListGroupItem, ListGroup, Collapse} from 'reactstrap';
 
 export const Profile: React.FC = () => {
 
@@ -27,7 +27,7 @@ export const Profile: React.FC = () => {
             <CardGroup>
             <div id="profileContainer">
                 <Card style={{ backgroundColor: '#c4a0e6', width: '18rem' }} id="profileCard">
-                    <img width="250" src={userProfile.profilePicture} alt='Missing: Profile Picture' id="profileImage"/>
+                    <img width="250" src={userProfile.profilePicture} alt='Missing' id="profileImage"/>
                     <CardBody>
                     <CardTitle id="username">{userProfile.username}</CardTitle>
                     <CardTitle>BIO: <i className="arrow down" onClick={toggle}></i>

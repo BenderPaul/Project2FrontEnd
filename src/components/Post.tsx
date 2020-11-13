@@ -1,17 +1,11 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button } from 'reactstrap';
-import { baseUrl, IPost, IUser } from '../interfaces';
+import { baseUrl, IUser } from '../interfaces';
 import '../style sheets/Post.scss';
 
 export const Post: React.FC<IUser[]> = (props:IUser[]) => {
     const [rendered, setRendered] = useState([] as JSX.Element[]);
-
-
-    const handleClick = (post:IPost) => {
-
-        post.likes += 1;
-    }
 
     useEffect(() => {
         const getPosts = async () => {
